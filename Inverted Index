@@ -1,0 +1,35 @@
+
+import operator
+docf=[]
+def create_index(tokens):
+    inverted_index = {}
+   
+    for key, val in tokens.items():
+        for word in val.lower().split():
+    
+            if inverted_index.get(word,False):
+                if key not in inverted_index[word]:
+                    inverted_index[word].append(key)
+                
+            else:
+                inverted_index[word] = [key]
+                
+            
+    return inverted_index
+
+index = create_index({1:"I did enact Julius Caesar I was killed I’ the Capitol; Brutus killed me",2: "So let it be with Caesar  The noble Brutus hath told you Caesar was ambitious"})
+sorted_index = sorted(index.items(), key=operator.itemgetter(0))
+docfreq=0
+
+    
+for x in index  :
+    if len(index[x]) is 2:
+        docfreq=2
+    else:
+        docfreq=1
+    index[x]=docfreq
+    
+        
+        
+print("The posting list is :- ", sorted_index)
+print("The document frequencies are: -", sorted(index.items()))
